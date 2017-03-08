@@ -86,6 +86,76 @@ void ex3(){
 }
 
 
+/* 4) --------------------------------------------------------------------
+
+Take one of your working programs and alter it by deleting the keyword void in the
+line
+
+	int main(void)
+
+When you compile your program, does your compiler complain? Probably not. (See
+Section 5.3, "Function Prototypes," on page 202, for further discussion.) .Next,
+remove the keyword vo; d and remove the following line from the body of main():
+
+	return 0;
+
+When you compile the program, does your compiler complain? This time it should.
+If your compiler does not complain, learn how to set a higher warnin~ level for 
+yur compiler. Generally speaking, programmers should always use the highest warn:ng
+level possible. One of the principal rules of programming is keep your complIer
+happy, but not at the expense of turning off all the warnings. Programmers should
+rework their code repeatedly until all the warnings have vauished.		*/
+
+void ex4(){
+	printf("Currently, I do not have a program with void parameter\n"
+		"to test the suggestion of the excercise.\n"
+		"I removed the ruturn 0; from the main program\n"
+		"I created to run these excercises. Surprisingly,\n"
+		"nothing happened. Let's try to make the warning level\n"
+		"of the compiler higher.\n\n");
+}
+
+/* 5) --------------------------------------------------------------------
+The following program may have a run-time error in it:
+
+	#include <stdio.h>
+	int main(void)
+	{
+	int x, y = 0;
+	x = 1 / y;
+	printf("x = %d\n", x);
+	return 0;
+	}
+
+Check to see that the program compiles without any error messages. Run the pro-
+gram to see the effect of integer division by zero. On most systems this program
+will exhibit a run-time error. If this happens on your system, try to rewrite the pro-
+gram without the variable y, but keep the error in the program. That is, divide by
+zero directly. Now what happens? */
+
+void ex5(void){
+	printf("The adapted version of the program, that is:\n\n"
+		"\tvoid main(void){\n"
+		"\t\tint x, y = 0;\n"
+	        "\t\tx = 1 / y;\n"
+        	"\t\tprintf(\"x = %%d\\n\", x);\n"
+		"\t}\n\n"
+		"did not return errors during compilation.\n"
+		"I got an \"Floating point exception (core dumped)\"\n" 
+		"error when I run the ex5() excercise from the main.\n\n");
+
+	printf("with the second version of the program:\n\n"
+		"\tvoid main(void){\n"
+		"\t\tint x = 0;\n"
+		"\t\tx = 1 / 0;\n"
+		"\t\tprintf(\"x = %%d\\n\", x);\n"	/*Execute calculation??*/
+		"\t}\n\n"
+		"the compiler only returned two warnings:\n"
+		"\t\"warning: format ‘%d’ expects a matching ‘int’ argument\"\n"
+		"\t\"warning: division by zero\"\n"
+		"One the program run, it returs the same error of the\n"
+		"previous version.\n\n");
+}
 
 
 /*Main progran ------------------------------------------------------------*/
@@ -97,7 +167,9 @@ int main(int argc, char *argv[]){
 		printf(">Select the excercise you do want to run:\n"
 		">\t1\tExercise 1\n"
                 ">\t2\tExercise 2\n"
-		">\t3\tExercise 3\n");
+		">\t3\tExercise 3\n"
+		">\t4\tExercise 4\n"
+		">\t5\tExercise 5\n");
 		scanf("%d", &ex);
 		if(ex == 1)
 			ex1();
@@ -105,7 +177,10 @@ int main(int argc, char *argv[]){
 			ex2();
 		else if(ex == 3)
 			ex3();
-	}while(ex > 0 && ex < 4);
+		else if(ex == 4)
+			ex4();
+		else if(ex == 5)
+			ex5();
+	}while(ex > 0 && ex < 6);
 	return 0;
-
 }
