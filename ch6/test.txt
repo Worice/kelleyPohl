@@ -1,0 +1,5 @@
+sizeof(s) = 27
+sizeof(p) = 8
+sizeof(a) = 12
+sizeof(d) = 40
+In f(): sizeof(a) = 8
