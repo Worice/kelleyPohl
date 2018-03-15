@@ -4,7 +4,7 @@
 
 void bit_print(short);
 void get_input(short *, short *, short *);
-short majority(short, short, short);
+short majority(short *, short *, short *);
 void input_text(short);
 void bit_print(short);
 
@@ -19,7 +19,7 @@ int main(){
 	bit_print(c);
 
 	get_input(&a, &b, &c); 
-	majority(a, b, c);
+	majority(&a, &b, &c);
 
 	bit_print(a);
 	bit_print(b);
@@ -30,33 +30,42 @@ int main(){
 /* AUX */
 
 void get_input(short *a, short *b, short *c){
-	for(int i = 1; i <= 3; ++i){
+	int i = 1;
+	short mask = 0, ina = 0, inb = 0, inc =0;
+	for(; i <= 16; ++i){
 		input_text(i);
-		scanf("%hu", a);
-		(*a) <<= 2;
+		scanf("%hu", &ina);
 
-		scanf("%hu", b);
-		(*b) << 1;
+		scanf("%hu", &inb);
 
-		scanf("%hu", c);
-		(*c) <<= 1;
+		scanf("%hu", &inc);
+		if(ina)
+			*a += 1;
+		if(inb)
+			*b += 1;
+		if(inc)
+			*c += 1;
+		if(i < 16){
+			*a <<= 1;
+			*b <<= 1;
+			*c <<= 1;
+		}
 	}
 }
 	
 
-short majority(short a, short b, short c){
+short majority(short *a, short *b, short *c){
 	int i = 0;
-	short counta = 0, countb = 0, countc = 0;
-	short mask = 1;
-	mask <<= 15;
+	unsigned short counta = 0, countb = 0, countc = 0, mask = 1;
 	for(; i < 16; ++i){
-		counta += ((mask & a) == 1);
-		countb += (mask & b);
-		countc += (mask & c);
+		counta += (mask & *a) == 0;
+		countb += (mask & *b) == 0;
+		countc += (mask & *c) == 0;
 
-		a <<= 1; b <<=1; c <<= 1;
+		/*bit_print(mask); */
+		mask <<= 1;
 	}
-	printf("\n\tyes\tno\n"
+	printf("\n\tno\tyes\n"
 		"Alice\t%hu\t%hu\n"
 		"Betty\t%hu\t%hu\n"
 		"Carol\t%hu\t%hu\n", 
