@@ -17,19 +17,24 @@ int main(){
 	};
 	
 	struct card c1, c2;	//Declare cards
+	typedef struct card card;
 
 
 
 	c1.pips = 3;		//Tre 
 	c1.suit = 's';
 	
-	printf("\nCard 1: %d\n", c1.pips);	
-	printf("\nCard 1: %c\n", c1.suit);
+	void print_card(card c){
+		printf("\nCard points: %d\n", c.pips);	
+		printf("\nCard suits: %c\n", c.suit);
+	}
+
+	print_card(c1);
 
 	get_integer(&c1);
-	printf("\nCard 1: %d\n", c1.pips);	
-	printf("\nCard 1: %c\n", c1.suit);
 	
+	print_card(c1);
+
 	c2 = c1;
 
 	typedef struct card card;
@@ -64,6 +69,24 @@ int main(){
 		 a -> im = b -> im + c -> im;
 	}
 
+	/* Paragraph 9.3 value and address to functions */
+
+	card update_card(card c){
+		char ch; int n;
+		
+		printf("\nChange card suit\n");
+		scanf(" %c", &ch);
+		c.suit = ch;
+		
+		printf("\bChange card pips:\n");
+		scanf("%d", &n);
+		c.pips = n;
+		
+		return c;
+	}	
+
+	c1 = update_card(c1);
+	print_card(c1);	
 
 	return 0;
 }
