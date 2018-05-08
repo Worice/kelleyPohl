@@ -10,6 +10,7 @@ void get_integer(card *);
 
 int main(){
 	/* Paragraph 9.1*/
+	printf("\nParagraph 9.1.\n");
 	
 	struct card{		//Declare struct card
 		int pips;
@@ -70,6 +71,7 @@ int main(){
 	}
 
 	/* Paragraph 9.3 value and address to functions */
+	printf("\nParagraph 9.3.\n");
 
 	card update_card(card c){
 		char ch; int n;
@@ -87,9 +89,47 @@ int main(){
 
 	c1 = update_card(c1);
 	print_card(c1);	
+	
+	/* Paragraph 9.4 access structure by address */
+	printf("\nParagraph 9.4.\n");
 
+	soldier update_soldier(soldier *s){
+		char ch; int n;
+		
+		printf("\nChange soldier suit\n");
+		scanf(" %c", &ch);
+		s -> suit = ch;
+		
+		printf("\bChange soldier pips:\n");
+		scanf("%d", &n);
+		s -> pips = n;
+	}
+	
+	soldier print_soldier(soldier *s){
+		printf("Soldier suit:\t%c\n", s -> suit);
+		printf("Soldier pips:\t%d\n", s -> pips);
+	}
+
+	update_soldier(&s1);
+	print_soldier(&s1);
+
+	/* Paragraph 9.7 */
+	printf("\nParagraph 9.7\n");
+
+	typedef union int_or_float{
+		int i;
+		float f;
+	}number;
+
+	number n;
+	n.i = 4444;
+	printf("i: %10d	f: %16.10e\n", n.i, n.f);
+	n.f = 4444.0;
+	printf("i: %10d	f: %16.10e\n", n.i, n.f);
+	
 	return 0;
 }
+
 
 
 /* AUX */
