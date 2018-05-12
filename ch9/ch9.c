@@ -5,7 +5,13 @@
 #include "ch9_class_info.h"
 #include "ch9_complex.h"
 
+/* Stack constants */
+#define MAX_LEN	1000
+#define EMPTY	-1
+#define FULL	(MAX_LEN - 1)
+
 void get_integer(card *);
+
 /* MAIN */
 
 int main(){
@@ -150,7 +156,7 @@ int main(){
 		unsigned i1: 7, i2: 7, i3: 7,
 			   : 11,			/* 11 filler bits */
 			 i4: 7, i5: 7, i6: 7;
-	};
+	} filled_double_word;
 
 
 	/* Paragraph 9.9 */
@@ -200,6 +206,55 @@ int main(){
 	bit_print(w.bit.b8, 32);
 	bit_print(w.byte.b0, 32);
 
+	/* Paragraph 9.10 */
+	printf("\nParagraph 9.10\n");
+
+	typedef struct{
+		char s[MAX_LEN];
+		int top;
+	} stack;
+
+	typedef enum boolean {true, false} boolean;
+	
+	void reset(stack *stk){
+		stk -> top = EMPTY;
+	}
+
+	void push(char c, stack *stk){
+		stk -> top++;
+		stk -> s[stk -> top] = c;
+	}
+
+	char pop(stack *stk){
+		return (stk -> s[stk -> top--]);
+	}
+
+	boolean empty(stack *stk){
+		return (boolean) (stk -> top == EMPTY);
+	}
+
+	boolean full(stack *stk){
+		return (boolean) (stk -> top == FULL);
+	}
+
+	char str[50] = "My name is Maurizio";
+	printf("%s", str);
+	stack stk;
+	reset(&stk);
+
+	printf("\nCopyng on the stack...\n");
+	printf("\nPrinting from the stack..!\n");
+	
+	int j = 0;
+	while(str[j] != '\0'){
+		if(!full(&stk))
+			push(str[j++], &stk);	
+	}
+
+	while(!empty(&stk)){
+		printf("%c", pop(&stk));
+	}
+	printf("\n");
 
 	return 0;
 
