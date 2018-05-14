@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 typedef struct{
-	unsigned r11 : 8, r12 : 8, r13 : 8, r14,
-		 r21 : 8, r22 : 8, r23 : 8, r24;
+	unsigned r11 : 8, r12 : 8, r13 : 8, r14 : 8,
+		 r21 : 8, r22 : 8, r23 : 8, r24 : 8;
 } matrix;
 
 matrix add(matrix *, matrix *);
@@ -13,16 +13,20 @@ void bit_print(unsigned int, int);
 /* MAIN */
 
 int main(){
-	matrix m1, m2;
-	m1.r11 = 1, m1.r12 = 1, m1.r13 = 1, m1.r14 = 1,
-	m1.r21 = 1, m1.r22 = 1, m1.r23 = 1, m1.r24 = 1;
+	
+	matrix m1, m2, m3;
+	m1.r11 = 97; m1.r12 = 1; m1.r13 = 1; m1.r14 = 1;
+	m1.r21 = 1; m1.r22 = 1; m1.r23 = 1; m1.r24 = 1;
 
-	m2.r11 = 1, m2.r12 = 1, m2.r13 = 1, m2.r14 = 1,
-	m2.r21 = 1, m2.r22 = 1, m2.r23 = 1, m2.r24 = 1;
+	m2.r11 = 2; m2.r12 = 2; m2.r13 = 2; m2.r14 = 2;
+	m2.r21 = 2; m2.r22 = 2; m2.r23 = 2; m2.r24 = 2;
 
 	printf("Here is the sum of two bytes from the matrices:\n");	
 	
+	printf("%d\n", m1.r11);	
+	printf("%c\n", m1.r11);	
 	bit_print(m1.r11, 8);
+	m3 = add(&m1, &m2);
 	
 
 	return 0;
@@ -45,7 +49,7 @@ void bit_print(unsigned int n, int rec){
 	int i, j;
 	if(rec > 0){
 		printf("%c", ((mask && n) == 1) ? '1' : '0');
-		n <<= 1;
+		mask >>= 1;
 		bit_print(n, rec - 1);
 	}
 	else
