@@ -7,7 +7,7 @@ int main(int argc, char *argv[]){
 	char *test = argv[2];		/*word to look for*/
 	char working_area[WORK_DIM] = {'\0'};		
 	char c;
-	int line_counter = 0;
+	int line_counter = 1;
 
 	while((c = fgetc(inp)) != EOF){
 		int i = 0;
