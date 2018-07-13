@@ -9,7 +9,8 @@ int largest(int []);
 void reverse(char *);
 int fact(int);
 void binary(int);
-
+int prime(int, int);
+void odds(int, int);
 /* MAIN */
 
 int main(){
@@ -24,7 +25,11 @@ int main(){
 	reverse(s);
 	printf("\nFactorial of 11:\t%d\n", fact(11));
 	printf("Binary of 1025:\t"); binary(1025);
+	printf("Is %d a prime number:\n%d\n", 17, prime(17, 2));
+	odds(4, 22);
+
 	return 0;
+
 }
 
 /* AUX */
@@ -87,6 +92,25 @@ void binary(int n){
 		binary(n >>= 1);
 	}
 }
+
+int prime(int n, int div){
+	if(div >= (n / 2))
+		return 1;
+	else
+		return (1 && (n % div != 0) && (prime(n, div + 1)));
+}
+
+void odds(int m, int n){
+	if(m <= n){
+		if(m % 2 != 0){
+			printf("%d ", m);
+			odds(m + 2, n);
+		}
+		else
+			odds(m + 1, n);
+	}
+}
+
 
 
 
