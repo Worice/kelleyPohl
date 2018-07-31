@@ -1,30 +1,30 @@
 /* Exercise 3.1 */
 
 #include<stdio.h>
-int marbles(int, char, char);
+int count_sequences(int, char, char);
 int count(int);
 
-/* AUX */
+
+/* MAIN */
 
 int main(){
-	printf("Result: %d\n", count(3));	
+	printf("%d\n", count(3));
 	return 0;
 }
 
 /* AUX */
 
-int marbles(int n, char last, char prev){
+int count_sequences(int n, char last, char prev){
 	if(n == 0)
 		return 1;
-	else{
+	else
 		if(last == prev)
-			return (last == 'R') ? marbles(n - 1, 'B', last) : marbles(n - 1, 'R', last); 
+			return (last == 'r') ? count_sequences(n - 1, 'b', last) : count_sequences(n - 1, 'r', last);
 		else
-			return marbles(n - 1, 'R', last) + marbles(n - 1, 'B', last);
-	}
-}
+			return count_sequences(n - 1, 'r', last) + count_sequences(n - 1, 'b', last);
+}	
 
 int count(int n){
-	return marbles(n, 'R', 'B');
+	return count_sequences(n, 'r', 'b');
 }
 
