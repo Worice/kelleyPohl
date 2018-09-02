@@ -2,7 +2,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#define DIM 3
+#define DIM 4
 
 typedef struct elem{
 	char *word;
@@ -20,12 +20,12 @@ int count_words(char *, char *[], int, int);
 /* MAIN */
 
 int main(){
-	char *s[] = {"hello", "hello", "world!"};
+	char *s[] = {"hello", "hello", "crazy", "world!"};
 	char *t = "embrace";
 	char *u = "embreis";
 	printf("Lenght test string '%s': %d\n", t, strlen2(t));
-	printf("'%s' and '%s' are %s\n", s[0], s[1] , compare_strings(s[0], s[1]) == 1 ? "equal" : "diff");
-	printf("'%s' appears %d times", s[0], count_words("hello", &s[DIM], 0, DIM));
+	printf("'%s' and '%s' are %s\n", s[0], s[1] , compare_strings("hello", s[1]) == 1 ? "equal" : "diff");
+	printf("'%s' appears %d times", s[0], count_words("hello", s, 0, DIM));
 	return 0;
 }
 
@@ -54,18 +54,13 @@ int count_words(char *s, char *ss[], int start, int end){
 	if(start != end)
 		if(compare_strings(s, ss[start])){
 			printf("1\n");
-			return 1 + count_words(s, ss[], ++start, end);
+			count_words(s, ss, ++start, end);
 		}
 		else{
 			printf("0\n");
-			return 0 + count_words(s, ss[], ++start, end);
+			count_words(s, ss, ++start, end);
 		}
 }
-
-	
-
-
-
 
 
 
